@@ -10,7 +10,7 @@ Prefab(
                     sheet: Sheet(
                         // TexturePrefab
                         texture: File(
-                            "texture/lola.png",
+                            "texture/sprite_sheet.png",
                             Png,
                             TextureMetadata(channel: Srgb),
                         ),
@@ -34,7 +34,7 @@ Prefab(
                     ),
                     // Transform
                     transform: (
-                        translation: (0.0, 0.0, 0.0),
+                        translation: (100.0, 100.0, 0.0),
                     ),
                 ),
                 // AnimationSetPrefab

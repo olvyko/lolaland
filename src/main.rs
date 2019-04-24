@@ -76,6 +76,4 @@ fn main() {
         println!("Error occurred during game execution: {}", e);
         ::std::process::exit(1);
     }
-
-    let foo = { true };
 }
