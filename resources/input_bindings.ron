@@ -1,10 +1,10 @@
 (
     axes:{
-        "leftright": Emulated(
+        "left_right": Emulated(
             pos: Key(D),
             neg: Key(A),
         ),
-        "updown": Emulated(
+        "up_down": Emulated(
             pos: Key(W),
             neg: Key(S),
         ),
