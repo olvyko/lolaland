@@ -4,9 +4,9 @@ use amethyst::ecs::prelude::{Component, VecStorage};
 #[allow(dead_code)]
 #[derive(Debug, Clone)]
 pub enum Shape {
-  Rect { width: f64, height: f64 },
+   Rect { width: f64, height: f64 },
 }
 
 impl Component for Shape {
-  type Storage = VecStorage<Self>;
+   type Storage = VecStorage<Self>;
 }

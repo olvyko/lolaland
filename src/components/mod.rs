@@ -8,6 +8,6 @@ pub use self::velocity::Velocity;
 
 // Register all components to the world
 pub fn register_components(world: &mut World) {
-  world.register::<Shape>();
-  world.register::<Velocity>();
+   world.register::<Shape>();
+   world.register::<Velocity>();
 }

@@ -1,9 +1,9 @@
 [package]
 name = "lolaland"
-version = "0.1.0"
+version = "0.0.1"
 authors = ["olvyko <olvyko@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-amethyst = { git = "https://github.com/amethyst/amethyst.git", res = "a738b8692208ed27f467267d12beaf079c200bdc" }
+amethyst = { git = "https://github.com/amethyst/amethyst.git" }
 serde = "1.0"
