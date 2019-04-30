@@ -12,7 +12,7 @@ const PLAYER_HEIGHT: f32 = 32.0;
 pub fn init_player(world: &mut World, progress_counter: &mut ProgressCounter) {
    // Starts asset loading
    let prefab_handle = world.exec(|loader: PrefabLoader<'_, AnimationPrefabData>| {
-      loader.load("prefab/sprite_sheet.ron", RonFormat, (), progress_counter)
+      loader.load("prefabs/sprite_sheet.ron", RonFormat, (), progress_counter)
    });
 
    let mut sprite_transform = Transform::default();
