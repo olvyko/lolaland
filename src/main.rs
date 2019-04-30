@@ -27,10 +27,10 @@ const BACKGROUND_COLOR: [f32; 4] = [0.01, 0.01, 0.01, 0.0];
 pub fn run() -> Result<(), amethyst::Error> {
    let app_root = application_root_dir()?;
 
-   let display_config_path = app_root.join("resources/configs/display.ron");
+   let display_config_path = app_root.join("assets/configs/display.ron");
    let display_config = DisplayConfig::load(&display_config_path);
-   let input_bindings_path = app_root.join("resources/configs/input_bindings.ron");
-   let assets_path = app_root.join("resources/");
+   let input_bindings_path = app_root.join("assets/configs/input_bindings.ron");
+   let assets_path = app_root.join("assets/");
 
    let pipe = {
       Pipeline::build().with_stage(

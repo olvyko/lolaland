@@ -1,8 +1,11 @@
-use amethyst::assets::*;
-use amethyst::core::math::Vector3;
-use amethyst::core::transform::Transform;
-use amethyst::ecs::prelude::*;
-use amethyst::prelude::Builder;
+use amethyst::{
+   assets::*,
+   core::math::Vector3,
+   core::transform::Transform,
+   ecs::prelude::*,
+   prelude::Builder,
+   renderer::{SpriteScenePrefab, SpriteSheetPrefab},
+};
 
 use crate::resources::AnimationPrefabData;
 
@@ -16,7 +19,7 @@ pub fn init_player(world: &mut World, progress_counter: &mut ProgressCounter) {
    });
 
    let mut sprite_transform = Transform::default();
-   sprite_transform.set_scale(PLAYER_WIDTH, PLAYER_HEIGHT, 0.);
+   sprite_transform.set_scale(2.0, 2.0, 0.);
    sprite_transform.set_translation(Vector3::new(100., 100., 0.));
 
    // Creates new entities with components from MyPrefabData

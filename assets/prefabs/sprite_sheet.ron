@@ -33,10 +33,7 @@ Prefab(
                   sprite_number: 0,
                ),
                // Transform
-               transform: (
-                  translation: (100.0, 100.0, 0.0),
-                  scale: (4.0, 4.0, 0.0),
-               ),
+               transform: None
             ),
             // AnimationSetPrefab
             animation_set: (
