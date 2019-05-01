@@ -1,13 +1,13 @@
 (
-   axes:{
-      "left_right": Emulated(
-         pos: Key(D),
-         neg: Key(A),
-      ),
-      "up_down": Emulated(
-         pos: Key(W),
-         neg: Key(S),
-      ),
-   },
-   actions:{},
+    axes:{
+        "left_right": Emulated(
+            pos: Key(D),
+            neg: Key(A),
+        ),
+        "up_down": Emulated(
+            pos: Key(W),
+            neg: Key(S),
+        ),
+    },
+    actions:{},
 )
