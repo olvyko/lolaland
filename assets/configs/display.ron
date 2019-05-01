@@ -1,6 +1,6 @@
 (
     title: "Lolaland",
-    dimensions: Some((640, 480)),
+    dimensions: Some((500, 500)),
     max_dimensions: None,
     min_dimensions: None,
     fullscreen: false,

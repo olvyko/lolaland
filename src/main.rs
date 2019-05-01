@@ -14,9 +14,10 @@ use amethyst::{
     core::transform::bundle::TransformBundle,
     input::InputBundle,
     prelude::*,
-    renderer::{DisplayConfig, DrawFlat2D, Pipeline, RenderBundle, SpriteRender, Stage},
+    renderer::{
+        ColorMask, DisplayConfig, DrawFlat2D, Pipeline, RenderBundle, SpriteRender, Stage, ALPHA,
+    },
     ui::{DrawUi, UiBundle},
-    utils::application_root_dir,
     LogLevelFilter,
 };
 
@@ -35,30 +36,35 @@ pub fn run() -> Result<(), amethyst::Error> {
         Pipeline::build().with_stage(
             Stage::with_backbuffer()
                 .clear_target(BACKGROUND_COLOR, 1.0)
-                .with_pass(DrawFlat2D::new())
+                .with_pass(
+                    DrawFlat2D::new(), //.with_transparency_settings(
+                                       //    ColorMask::all(),
+                                       //    ALPHA,
+                                       //    None,)
+                )
                 .with_pass(DrawUi::new()),
         )
     };
 
     let game_data = GameDataBuilder::default()
-        .with(
-            PrefabLoaderSystem::<AnimationPrefabData>::default(),
-            "prefab_loader_system",
-            &[],
-        )
         .with_bundle(
             InputBundle::<String, String>::new().with_bindings_from_file(&input_bindings_path)?,
         )?
         .with_bundle(GameBundle)?
+        .with_bundle(RenderBundle::new(pipe, Some(display_config)).with_sprite_sheet_processor())?
         .with_bundle(TransformBundle::new())?
         .with_bundle(AnimationBundle::<AnimationId, SpriteRender>::new(
             "animation_control_system",
             "sampler_interpolation_system",
         ))?
-        .with_bundle(UiBundle::<String, String>::new())?
-        .with_bundle(RenderBundle::new(pipe, Some(display_config)).with_sprite_sheet_processor())?;
+        .with(
+            PrefabLoaderSystem::<AnimationPrefabData>::default(),
+            "prefab_loader_system",
+            &[],
+        )
+        .with_bundle(UiBundle::<String, String>::new())?;
 
-    let mut game = Application::new(assets_path, GameState::default(), game_data)?;
+    let mut game = Application::new(assets_path, GameState, game_data)?;
 
     Ok(game.run())
 }
@@ -74,6 +80,39 @@ fn main() {
 
     if let Err(e) = run() {
         println!("Error occurred during game execution: {}", e);
+        pause();
         std::process::exit(1);
     }
+}
+
+use std::{env, io, path};
+fn application_root_dir() -> Result<path::PathBuf, io::Error> {
+    if let Some(manifest_dir) = env::var_os("CARGO_MANIFEST_DIR") {
+        return Ok(path::PathBuf::from(manifest_dir));
+    }
+
+    let mut exe = env::current_exe()?;
+
+    // Modify in-place to avoid an extra copy.
+    if exe.pop() {
+        return Ok(exe);
+    }
+
+    Err(io::Error::new(
+        io::ErrorKind::Other,
+        "Failed to find an application root",
+    ))
+}
+
+fn pause() {
+    use std::io;
+    use std::io::prelude::*;
+
+    let mut stdin = io::stdin();
+    let mut stdout = io::stdout();
+
+    write!(stdout, "Press any key to continue...").unwrap();
+    stdout.flush().unwrap();
+
+    let _ = stdin.read(&mut [0u8]).unwrap();
 }
