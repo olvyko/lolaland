@@ -1,13 +1,12 @@
-mod bundle;
 mod components;
 mod entities;
 mod resources;
 mod states;
 mod systems;
 
-use self::bundle::GameBundle;
 use self::resources::{AnimationId, AnimationPrefabData};
 use self::states::GameState;
+use self::systems::GameBundle;
 
 use amethyst::{
     animation::AnimationBundle,
