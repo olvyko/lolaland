@@ -14,7 +14,7 @@ pub fn init_player(world: &mut World) {
         let loader = world.read_resource::<Loader>();
         let texture_storage = world.read_resource::<AssetStorage<Texture>>();
         loader.load(
-            "textures/sprite_sheet.png",
+            "textures/lola_spritesheet.png",
             PngFormat,
             TextureMetadata::srgb_scale(),
             (),
@@ -26,7 +26,7 @@ pub fn init_player(world: &mut World) {
         let loader = world.read_resource::<Loader>();
         let sprite_sheet_store = world.read_resource::<AssetStorage<SpriteSheet>>();
         loader.load(
-            "textures/sprite_sheet.ron",
+            "textures/lola_spritesheet.ron",
             SpriteSheetFormat,
             texture_handle,
             (),

@@ -28,7 +28,7 @@ pub fn run() -> Result<(), amethyst::Error> {
     let app_root = application_root_dir()?;
 
     let display_config_path = app_root.join("assets/configs/display.ron");
-    let input_bindings_path = app_root.join("assets/configs/input_bindings.ron");
+    let input_bindings_path = app_root.join("assets/configs/input.ron");
     let assets_path = app_root.join("assets/");
     let display_config = DisplayConfig::load(&display_config_path);
 

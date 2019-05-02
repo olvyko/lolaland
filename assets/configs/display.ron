@@ -1,3 +1,4 @@
+// https://amethyst.rs/doc/master/doc/amethyst_renderer/struct.displayconfig
 (
     title: "Lolaland",
     dimensions: Some((500, 500)),
@@ -7,4 +8,5 @@
     multisampling: 1,
     visibility: true,
     vsync: true,
+    resizable: false,
 )
