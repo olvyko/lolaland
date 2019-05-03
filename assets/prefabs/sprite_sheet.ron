@@ -10,7 +10,7 @@ Prefab(
                 sheet: Sheet(
                     // TexturePrefab
                     texture: File(
-                        "textures/sprite_sheet.png",
+                        "textures/lola_spritesheet.png",
                         Png,
                         TextureMetadata(channel: Srgb),
                     ),
@@ -23,6 +23,38 @@ Prefab(
                             rows: 4,
                             cell_size: (32, 32),
                         )),
+                        // List(
+                        //     texture_width: 192,
+                        //     texture_height: 128,
+                        //     [
+                        //     (x: 0, y: 0, width: 32, height: 32),
+                        //     (x: 32, y: 0, width: 32, height: 32),
+                        //     (x: 64, y: 0, width: 32, height: 32),
+                        //     (x: 96, y: 0, width: 32, height: 32),
+                        //     (x: 128, y: 0, width: 32, height: 32),
+                        //     (x: 160, y: 0, width: 32, height: 32),
+
+                        //     (x: 0, y: 32, width: 32, height: 32),
+                        //     (x: 32, y: 32, width: 32, height: 32),
+                        //     (x: 64, y: 32, width: 32, height: 32),
+                        //     (x: 96, y: 32, width: 32, height: 32),
+                        //     (x: 128, y: 32, width: 32, height: 32),
+                        //     (x: 160, y: 32, width: 32, height: 32),
+
+                        //     (x: 0, y: 64, width: 32, height: 32),
+                        //     (x: 32, y: 64, width: 32, height: 32),
+                        //     (x: 64, y: 64, width: 32, height: 32),
+                        //     (x: 96, y: 64, width: 32, height: 32),
+                        //     (x: 128, y: 64, width: 32, height: 32),
+                        //     (x: 160, y: 64, width: 32, height: 32),
+
+                        //     (x: 0, y: 96, width: 32, height: 32),
+                        //     (x: 32, y: 96, width: 32, height: 32),
+                        //     (x: 64, y: 96, width: 32, height: 32),
+                        //     (x: 96, y: 96, width: 32, height: 32),
+                        //     (x: 128, y: 96, width: 32, height: 32),
+                        //     (x: 160, y: 96, width: 32, height: 32),
+                        // ]),
                     ],
                     // optional
                     name: "lola",

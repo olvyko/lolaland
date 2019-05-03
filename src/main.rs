@@ -14,10 +14,9 @@ use amethyst::{
     core::transform::bundle::TransformBundle,
     input::InputBundle,
     prelude::*,
-    renderer::{
-        ColorMask, DisplayConfig, DrawFlat2D, Pipeline, RenderBundle, SpriteRender, Stage, ALPHA,
-    },
+    renderer::{DisplayConfig, DrawFlat2D, Pipeline, RenderBundle, SpriteRender, Stage},
     ui::{DrawUi, UiBundle},
+    utils::application_root_dir,
     LogLevelFilter,
 };
 
@@ -36,12 +35,7 @@ pub fn run() -> Result<(), amethyst::Error> {
         Pipeline::build().with_stage(
             Stage::with_backbuffer()
                 .clear_target(BACKGROUND_COLOR, 1.0)
-                .with_pass(
-                    DrawFlat2D::new(), //.with_transparency_settings(
-                                       //    ColorMask::all(),
-                                       //    ALPHA,
-                                       //    None,)
-                )
+                .with_pass(DrawFlat2D::new())
                 .with_pass(DrawUi::new()),
         )
     };
@@ -83,25 +77,6 @@ fn main() {
         pause();
         std::process::exit(1);
     }
-}
-
-use std::{env, io, path};
-fn application_root_dir() -> Result<path::PathBuf, io::Error> {
-    if let Some(manifest_dir) = env::var_os("CARGO_MANIFEST_DIR") {
-        return Ok(path::PathBuf::from(manifest_dir));
-    }
-
-    let mut exe = env::current_exe()?;
-
-    // Modify in-place to avoid an extra copy.
-    if exe.pop() {
-        return Ok(exe);
-    }
-
-    Err(io::Error::new(
-        io::ErrorKind::Other,
-        "Failed to find an application root",
-    ))
 }
 
 fn pause() {

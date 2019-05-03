@@ -1,7 +1,4 @@
-use amethyst::{
-    animation::*, assets::*, core::*, ecs::*, renderer::*, GameData, SimpleState, SimpleTrans,
-    StateData, Trans,
-};
+use amethyst::{GameData, SimpleState, StateData};
 
 use crate::components::register_components;
 use crate::entities::init_entities;
