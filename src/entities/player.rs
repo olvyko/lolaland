@@ -1,5 +1,6 @@
 use amethyst::{assets::*, core::Transform, ecs::prelude::*, prelude::Builder};
 
+use crate::components::Player;
 use crate::resources::AnimationPrefabData;
 
 pub fn init_player(world: &mut World) {
@@ -13,6 +14,7 @@ pub fn init_player(world: &mut World) {
 
     world
         .create_entity()
+        .with(Player::new(32.0, 32.0, 1.0))
         .with(prefab_handle)
         .with(sprite_transform)
         .build();
