@@ -13,6 +13,7 @@ use serde::*;
 pub enum AnimationId {
     Idle,
     Walk,
+    Jump,
 }
 
 // Loading data for one entity

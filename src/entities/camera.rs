@@ -10,6 +10,8 @@ pub fn init_camera(world: &mut World) {
     world
         .create_entity()
         .with(camera_transform)
-        .with(Camera::from(Projection::orthographic(0.0, 60.0, 0.0, 60.0)))
+        .with(Camera::from(Projection::orthographic(
+            0.0, 100.0, 0.0, 100.0,
+        )))
         .build();
 }

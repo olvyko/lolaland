@@ -1,0 +1,108 @@
+#![enable(implicit_some)]
+Prefab(
+    entities: [
+        // Lola
+        PrefabEntity(
+            data: AnimationPrefabData(
+                // SpriteScenePrefab
+                sprite_scene: (
+                    // SpriteSheetPrefab
+                    sheet: Sheet(
+                        // Optional
+                        name: "lola",
+                        // TexturePrefab
+                        texture: File(
+                            "textures/lola_spritesheet.png",
+                            Png,
+                            TextureMetadata(
+                                channel: Srgb, 
+                                sampler: SamplerInfo(
+                                    filter: Scale, 
+                                    wrap_mode: (Clamp, Clamp, Clamp),
+                                ),
+                            ),
+                        ),
+                        sprites: [
+                            // Sprites
+                            Grid((
+                                texture_width: 192,
+                                texture_height: 640,
+                                columns: 6,
+                                rows: 6,
+                                cell_size: (32, 32),
+                            )),
+                        ],
+                    ),
+                    // SpriteRenderPrefab
+                    render: (
+                        sheet: "lola",
+                        sprite_number: 0,
+                    ),
+                    // Transform
+                    transform: None
+                ),
+                // AnimationSetPrefab
+                animation_set: (
+                    animations: [
+                        // Walk
+                        (
+                            Walk,
+                            (
+                                samplers: [
+                                    (
+                                        0,
+                                        SpriteIndex,
+                                        (
+                                            input: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1],
+                                            output: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+                                            function: Step,
+                                        ),
+                                    ),
+                                ],
+                            ),
+                        ),
+                        // Idle
+                        (
+                            // AnimationId
+                            Idle,
+                            (
+                                samplers: [
+                                    (
+                                        0,
+                                        // Only SpriteIndex channel allowed for SpriteRender in AnimationSetPrefab
+                                        SpriteIndex,
+                                        (
+                                            // Time of key frames
+                                            input: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1],
+                                            // Sprite indexes from SpriteSheet for key frames
+                                            output: [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+                                            // Sprites can only ever be animated with Step
+                                            function: Step,
+                                        ),
+                                    ),
+                                ],
+                            ),
+                        ),
+                        // Jump
+                        (
+                            Jump,
+                            (
+                                samplers: [
+                                    (
+                                        0,
+                                        SpriteIndex,
+                                        (
+                                            input: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1],
+                                            output: [24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35],
+                                            function: Step,
+                                        ),
+                                    ),
+                                ],
+                            ),
+                        )
+                    ],
+                ),
+            ),
+        ),
+    ],
+)
