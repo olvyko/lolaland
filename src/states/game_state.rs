@@ -26,30 +26,30 @@ impl SimpleState for GameState {
         init_entities(world);
     }
 
-    fn update(&mut self, data: &mut StateData<'_, GameData<'_, '_>>) -> SimpleTrans {
-        let StateData { world, .. } = data;
-        // Execute a pass similar to a system
-        world.exec(
-            |(entities, animation_sets, mut control_sets): (
-                Entities,
-                ReadStorage<AnimationSet<AnimationId, SpriteRender>>,
-                WriteStorage<AnimationControlSet<AnimationId, SpriteRender>>,
-            )| {
-                // For each entity that has AnimationSet
-                for (entity, animation_set) in (&entities, &animation_sets).join() {
-                    // Creates a new AnimationControlSet for the entity
-                    let control_set = get_animation_set(&mut control_sets, entity).unwrap();
-                    control_set.add_animation(
-                        AnimationId::Idle,
-                        &animation_set.get(&AnimationId::Idle).unwrap(),
-                        EndControl::Loop(None),
-                        1.0,
-                        AnimationCommand::Start,
-                    );
-                }
-            },
-        );
+    // fn update(&mut self, data: &mut StateData<'_, GameData<'_, '_>>) -> SimpleTrans {
+    //     let StateData { world, .. } = data;
+    //     // Execute a pass similar to a system
+    //     world.exec(
+    //         |(entities, animation_sets, mut control_sets): (
+    //             Entities,
+    //             ReadStorage<AnimationSet<AnimationId, SpriteRender>>,
+    //             WriteStorage<AnimationControlSet<AnimationId, SpriteRender>>,
+    //         )| {
+    //             // For each entity that has AnimationSet
+    //             for (entity, animation_set) in (&entities, &animation_sets).join() {
+    //                 // Creates a new AnimationControlSet for the entity
+    //                 let control_set = get_animation_set(&mut control_sets, entity).unwrap();
+    //                 control_set.add_animation(
+    //                     AnimationId::Idle,
+    //                     &animation_set.get(&AnimationId::Idle).unwrap(),
+    //                     EndControl::Loop(None),
+    //                     1.0,
+    //                     AnimationCommand::Start,
+    //                 );
+    //             }
+    //         },
+    //     );
 
-        Trans::None
-    }
+    //     Trans::None
+    // }
 }

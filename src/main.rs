@@ -44,7 +44,6 @@ pub fn run() -> Result<(), amethyst::Error> {
         .with_bundle(
             InputBundle::<String, String>::new().with_bindings_from_file(&input_bindings_path)?,
         )?
-        .with_bundle(GameBundle)?
         .with_bundle(RenderBundle::new(pipe, Some(display_config)).with_sprite_sheet_processor())?
         .with_bundle(TransformBundle::new())?
         .with_bundle(AnimationBundle::<AnimationId, SpriteRender>::new(
@@ -56,7 +55,8 @@ pub fn run() -> Result<(), amethyst::Error> {
             "prefab_loader_system",
             &[],
         )
-        .with_bundle(UiBundle::<String, String>::new())?;
+        .with_bundle(UiBundle::<String, String>::new())?
+        .with_bundle(GameBundle)?;
 
     let mut game = Application::new(assets_path, GameState, game_data)?;
 
