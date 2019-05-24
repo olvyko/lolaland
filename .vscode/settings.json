@@ -1,8 +1,8 @@
 {
-  "files.insertFinalNewline": true,
-  "editor.detectIndentation": false,
-  "editor.formatOnSave": true,
-  "editor.insertSpaces": true,
-  "editor.tabSize": 4,
-  "files.eol": "\r\n"
+    "files.insertFinalNewline": true,
+    "editor.detectIndentation": false,
+    "editor.formatOnSave": true,
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4,
+    "files.eol": "\r\n",
 }
