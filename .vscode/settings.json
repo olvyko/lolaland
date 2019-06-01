@@ -5,4 +5,21 @@
     "editor.insertSpaces": true,
     "editor.tabSize": 4,
     "files.eol": "\r\n",
+    "workbench.colorCustomizations": {
+        "[Visual Studio Dark]": {
+            "syntax.type": "#4EC9B0",
+            "syntax.namespace": "#DCDCDC",
+            "syntax.function": "#DCDCDC",
+            "syntax.variable": "#DCDCDC",
+            "syntax.string": "#D69D85",
+            "syntax.number": "#B5CEA8",
+            "syntax.punctuation": "#DCDCDC",
+            "syntax.comment": "#608B4E",
+            "syntax.keyword_constant": "#569CD6",
+            "syntax.keyword_directive": "#9B9B9B",
+            "syntax.keyword_control": "#569CD6",
+            "syntax.keyword_operator": "#DCDCDC",
+            "syntax.storage_modifier": "#569CD6"
+        }
+    },
 }
