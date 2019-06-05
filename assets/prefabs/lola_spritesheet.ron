@@ -15,9 +15,9 @@ Prefab(
                             "textures/lola_spritesheet.png",
                             Png,
                             TextureMetadata(
-                                channel: Srgb, 
+                                channel: Srgb,
                                 sampler: SamplerInfo(
-                                    filter: Scale, 
+                                    filter: Scale,
                                     wrap_mode: (Clamp, Clamp, Clamp),
                                 ),
                             ),
