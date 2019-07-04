@@ -1,6 +1,7 @@
 # Lolaland
 
 Game `lolaland` - open source 2d game about little kitty named Lola.
+
 ![Lola The Cat :D](assets/textures/lola_the_cat.png?raw=true "Lola The Cat :D")
 
 ## Development
