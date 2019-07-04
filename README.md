@@ -1,6 +1,7 @@
 # Lolaland
 
 Game `lolaland` - open source 2d game about little kitty named Lola.
+![Lola The Cat :D](assets/textures/lola_the_cat.png?raw=true "Lola The Cat :D")
 
 ## Development
 
@@ -12,13 +13,13 @@ cargo run
 
 ## Built With
 
-* [Amethyst](https://github.com/amethyst/amethyst) - Data-oriented and data-driven game engine written in Rust
-* [Serde](https://github.com/serde-rs/serde) - Serialization framework for Rust
+- [Amethyst](https://github.com/amethyst/amethyst) - Data-oriented and data-driven game engine written in Rust
+- [Serde](https://github.com/serde-rs/serde) - Serialization framework for Rust
 
 ## Authors
 
-* [olvyko](https://github.com/olvyko)
-* [enfipy](https://github.com/enfipy)
+- [olvyko](https://github.com/olvyko)
+- [enfipy](https://github.com/enfipy)
 
 See also the list of [contributors](https://github.com/olvyko/lolaland/contributors) who participated in this project.
 
