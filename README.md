@@ -21,6 +21,7 @@ cargo run
 
 - [olvyko](https://github.com/olvyko)
 - [enfipy](https://github.com/enfipy)
+- [diadina](https://github.com/diadina)
 
 See also the list of [contributors](https://github.com/olvyko/lolaland/contributors) who participated in this project.
 
