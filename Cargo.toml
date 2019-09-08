@@ -1,12 +1,13 @@
 [package]
 name = "lolaland"
-version = "0.0.1"
+version = "0.0.2"
 authors = ["olvyko <olvyko@gmail.com>"]
 edition = "2018"
 
 [dependencies]
 serde = "1.0"
+amethyst = "0.12.0"
 
-[dependencies.amethyst]
-git = "https://github.com/amethyst/amethyst.git"
-rev = "a738b8692208ed27f467267d12beaf079c200bdc"
+[features]
+vulkan = ["amethyst/vulkan"]
+metal = ["amethyst/metal"]

@@ -11,17 +11,24 @@ Prefab(
                         // Optional
                         name: "lola",
                         // TexturePrefab
-                        texture: File(
-                            "textures/lola_spritesheet.png",
-                            Png,
-                            TextureMetadata(
-                                channel: Srgb,
-                                sampler: SamplerInfo(
-                                    filter: Scale,
-                                    wrap_mode: (Clamp, Clamp, Clamp),
+                        texture: File("textures/lola_spritesheet.png", (
+                            "IMAGE", (
+                                sampler_info: (
+                                    min_filter: Nearest,
+                                    mag_filter: Nearest,
+                                    mip_filter: Nearest,
+                                    wrap_mode: (Tile, Tile, Tile),
+                                    lod_bias: (0),
+                                    lod_range: (
+                                        start: ( 0 ),
+                                        end: ( 0 ),
+                                    ),
+                                    comparison: None,
+                                    border: (0),
+                                    anisotropic: Off,
                                 ),
                             ),
-                        ),
+                        )),
                         sprites: [
                             // Sprites
                             Grid((

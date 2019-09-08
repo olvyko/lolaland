@@ -4,7 +4,7 @@ use amethyst::{
     derive::PrefabData,
     ecs::prelude::Entity,
     error::Error,
-    renderer::{SpriteRender, SpriteScenePrefab},
+    renderer::{SpriteRender, sprite::{prefab::SpriteScenePrefab}},
 };
 use serde::*;
 

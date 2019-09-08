@@ -4,7 +4,7 @@ use amethyst::{
     },
     core::Transform,
     ecs::{Entities, Join, Read, ReadStorage, System, WriteStorage},
-    input::InputHandler,
+    input::{InputHandler, StringBindings},
     renderer::SpriteRender,
 };
 
@@ -20,7 +20,7 @@ impl<'s> System<'s> for AnimationSystem {
         WriteStorage<'s, Transform>,
         ReadStorage<'s, AnimationSet<AnimationId, SpriteRender>>,
         WriteStorage<'s, AnimationControlSet<AnimationId, SpriteRender>>,
-        Read<'s, InputHandler<String, String>>,
+        Read<'s, InputHandler<StringBindings>>,
     );
 
     fn run(

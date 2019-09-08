@@ -6,7 +6,7 @@ use crate::resources::AnimationPrefabData;
 pub fn init_player(world: &mut World) {
     // Starts asset loading
     let prefab_handle = world.exec(|loader: PrefabLoader<'_, AnimationPrefabData>| {
-        loader.load("prefabs/lola_spritesheet.ron", RonFormat, (), ())
+        loader.load("prefabs/lola_spritesheet.ron", RonFormat, ())
     });
 
     let mut sprite_transform = Transform::default();

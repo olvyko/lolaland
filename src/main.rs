@@ -12,16 +12,20 @@ use amethyst::{
     animation::AnimationBundle,
     assets::PrefabLoaderSystem,
     core::transform::bundle::TransformBundle,
-    input::InputBundle,
+    input::{InputBundle, StringBindings},
     prelude::*,
-    renderer::{DisplayConfig, DrawFlat2D, Pipeline, RenderBundle, SpriteRender, Stage},
-    ui::{DrawUi, UiBundle},
+    renderer::{
+        plugins::{RenderFlat2D, RenderToWindow},
+        types::DefaultBackend,
+        RenderingBundle, SpriteRender,
+    },
+    ui::{RenderUi, UiBundle},
     utils::application_root_dir,
     LogLevelFilter,
 };
 
 // Dark gray
-const BACKGROUND_COLOR: [f32; 4] = [0.01, 0.01, 0.01, 0.0];
+const BACKGROUND_COLOR: [f32; 4] = [0.01, 0.01, 0.01, 1.0];
 
 pub fn run() -> Result<(), amethyst::Error> {
     let app_root = application_root_dir()?;
@@ -29,22 +33,22 @@ pub fn run() -> Result<(), amethyst::Error> {
     let display_config_path = app_root.join("assets/configs/display.ron");
     let input_bindings_path = app_root.join("assets/configs/input.ron");
     let assets_path = app_root.join("assets/");
-    let display_config = DisplayConfig::load(&display_config_path);
-
-    let pipe = {
-        Pipeline::build().with_stage(
-            Stage::with_backbuffer()
-                .clear_target(BACKGROUND_COLOR, 1.0)
-                .with_pass(DrawFlat2D::new())
-                .with_pass(DrawUi::new()),
-        )
-    };
 
     let game_data = GameDataBuilder::default()
         .with_bundle(
-            InputBundle::<String, String>::new().with_bindings_from_file(&input_bindings_path)?,
+            InputBundle::<StringBindings>::new().with_bindings_from_file(&input_bindings_path)?,
         )?
-        .with_bundle(RenderBundle::new(pipe, Some(display_config)).with_sprite_sheet_processor())?
+        .with_bundle(
+            RenderingBundle::<DefaultBackend>::new()
+                // The RenderToWindow plugin provides all the scaffolding for opening a window and
+                // drawing on it
+                .with_plugin(
+                    RenderToWindow::from_config_path(display_config_path)
+                        .with_clear(BACKGROUND_COLOR),
+                )
+                .with_plugin(RenderFlat2D::default())
+                .with_plugin(RenderUi::default()),
+        )?
         .with_bundle(TransformBundle::new())?
         .with_bundle(AnimationBundle::<AnimationId, SpriteRender>::new(
             "animation_control_system",
@@ -55,7 +59,7 @@ pub fn run() -> Result<(), amethyst::Error> {
             "prefab_loader_system",
             &[],
         )
-        .with_bundle(UiBundle::<String, String>::new())?
+        .with_bundle(UiBundle::<StringBindings>::new())?
         .with_bundle(GameBundle)?;
 
     let mut game = Application::new(assets_path, GameState, game_data)?;

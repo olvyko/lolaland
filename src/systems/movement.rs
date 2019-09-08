@@ -1,7 +1,7 @@
 use amethyst::{
     core::Transform,
     ecs::{Join, Read, ReadStorage, System, WriteStorage},
-    input::InputHandler,
+    input::{InputHandler, StringBindings},
 };
 
 use crate::components::Player;
@@ -12,7 +12,7 @@ impl<'s> System<'s> for MovementSystem {
     type SystemData = (
         ReadStorage<'s, Player>,
         WriteStorage<'s, Transform>,
-        Read<'s, InputHandler<String, String>>,
+        Read<'s, InputHandler<StringBindings>>,
     );
 
     fn run(&mut self, (players, mut transforms, input): Self::SystemData) {
