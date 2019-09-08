@@ -5,9 +5,16 @@ authors = ["olvyko <olvyko@gmail.com>"]
 edition = "2018"
 
 [dependencies]
+log = "0.4.6"
 serde = "1.0"
 amethyst = "0.12.0"
+
+[dependencies.specs-physics]
+git = "https://github.com/amethyst/specs-physics.git"
+rev = "c2db9419359f58dc54415d284063138e82016c5c"
+features = ["amethyst"]
 
 [features]
 vulkan = ["amethyst/vulkan"]
 metal = ["amethyst/metal"]
+

@@ -1,16 +1,15 @@
 use amethyst::ecs::prelude::{Component, VecStorage};
 
 // Component represents the shape of an entity
-#[allow(dead_code)]
 #[derive(Debug, Clone)]
 pub struct Player {
-    pub width: f64,
-    pub height: f64,
-    pub velocity: f64,
+    pub width: f32,
+    pub height: f32,
+    pub velocity: f32,
 }
 
 impl Player {
-    pub fn new(width: f64, height: f64, velocity: f64) -> Player {
+    pub fn new(width: f32, height: f32, velocity: f32) -> Player {
         Player {
             width,
             height,

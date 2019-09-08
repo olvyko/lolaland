@@ -1,3 +1,6 @@
+#[macro_use]
+extern crate log;
+
 mod components;
 mod entities;
 mod resources;
@@ -6,7 +9,7 @@ mod systems;
 
 use self::resources::{AnimationId, AnimationPrefabData};
 use self::states::GameState;
-use self::systems::GameBundle;
+use self::systems::{GameBundle, PhysicsBundle};
 
 use amethyst::{
     animation::AnimationBundle,
@@ -15,7 +18,7 @@ use amethyst::{
     input::{InputBundle, StringBindings},
     prelude::*,
     renderer::{
-        plugins::{RenderFlat2D, RenderToWindow},
+        plugins::{RenderDebugLines, RenderFlat2D, RenderToWindow},
         types::DefaultBackend,
         RenderingBundle, SpriteRender,
     },
@@ -25,7 +28,7 @@ use amethyst::{
 };
 
 // Dark gray
-const BACKGROUND_COLOR: [f32; 4] = [0.01, 0.01, 0.01, 1.0];
+const BACKGROUND_COLOR: [i32; 4] = [100, 100, 100, 255];
 
 pub fn run() -> Result<(), amethyst::Error> {
     let app_root = application_root_dir()?;
@@ -47,13 +50,15 @@ pub fn run() -> Result<(), amethyst::Error> {
                         .with_clear(BACKGROUND_COLOR),
                 )
                 .with_plugin(RenderFlat2D::default())
-                .with_plugin(RenderUi::default()),
+                .with_plugin(RenderUi::default())
+                .with_plugin(RenderDebugLines::default()),
         )?
         .with_bundle(TransformBundle::new())?
         .with_bundle(AnimationBundle::<AnimationId, SpriteRender>::new(
             "animation_control_system",
             "sampler_interpolation_system",
         ))?
+        .with_bundle(PhysicsBundle::default().with_debug_lines())?
         .with(
             PrefabLoaderSystem::<AnimationPrefabData>::default(),
             "prefab_loader_system",
@@ -62,7 +67,7 @@ pub fn run() -> Result<(), amethyst::Error> {
         .with_bundle(UiBundle::<StringBindings>::new())?
         .with_bundle(GameBundle)?;
 
-    let mut game = Application::new(assets_path, GameState, game_data)?;
+    let mut game = Application::new(assets_path, GameState::default(), game_data)?;
 
     Ok(game.run())
 }

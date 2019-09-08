@@ -4,10 +4,11 @@ use crate::components::register_components;
 use crate::entities::init_entities;
 use crate::resources::add_resources;
 
+#[derive(Default)]
 pub struct GameState;
 
-impl SimpleState for GameState {
-    fn on_start(&mut self, state_data: StateData<'_, GameData<'_, '_>>) {
+impl<'a, 'b> SimpleState for GameState {
+    fn on_start(&mut self, state_data: StateData<GameData>) {
         let StateData { world, .. } = state_data;
 
         register_components(world);

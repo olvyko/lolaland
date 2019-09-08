@@ -5,4 +5,7 @@
     "editor.insertSpaces": true,
     "editor.tabSize": 4,
     "files.eol": "\r\n",
+    "rust.features": [
+        "vulkan"
+    ]
 }
