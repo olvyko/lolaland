@@ -6,10 +6,16 @@ Game `lolaland` - open source 2d game about little kitty named Lola.
 
 ## Development
 
-To run this project:
+To run this project on Windows:
 
 ```
-cargo run
+cargo run --features vulkan
+```
+
+To run this project on OSX:
+
+```
+cargo run --features metal
 ```
 
 ## Built With
