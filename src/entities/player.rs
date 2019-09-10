@@ -1,13 +1,17 @@
 use amethyst::{
     assets::*,
-    core::{math::Vector3, Transform},
+    core::{
+        math::{Isometry3, Vector3},
+        Transform,
+    },
     ecs::prelude::*,
     prelude::Builder,
 };
 
 use specs_physics::{
-    colliders::Shape, nphysics::object::BodyStatus, PhysicsBody, PhysicsBodyBuilder,
-    PhysicsColliderBuilder,
+    colliders::Shape,
+    nphysics::{algebra::Velocity3, object::BodyStatus},
+    PhysicsBodyBuilder, PhysicsColliderBuilder,
 };
 
 use crate::components::Player;
@@ -19,22 +23,20 @@ pub fn init_player(world: &mut World) {
         loader.load("prefabs/lola_spritesheet.ron", RonFormat, ())
     });
 
-    let transform = Transform::from(Vector3::new(50.0, 50.0, 0.0));
-    let player = Player::new(32.0, 32.0, 1.0);
-
     world
         .create_entity()
-        .with(player.clone())
-        .with(transform)
+        .with(Player::new(32.0, 32.0, 1.0))
+        .with(Transform::from(Vector3::new(50.0, 50.0, 0.0)))
         .with(
             PhysicsBodyBuilder::<f32>::from(BodyStatus::Dynamic)
-                .gravity_enabled(true)
+                .velocity(Velocity3::linear(0.0, -4.0, 0.0))
                 .build(),
         )
         .with(
             PhysicsColliderBuilder::<f32>::from(Shape::Cuboid {
-                half_extents: Vector3::new(player.width, player.height, 1.0),
+                half_extents: Vector3::new(32.0, 32.0, 1.0),
             })
+            .offset_from_parent(Isometry3::translation(50.0, 50.0, 1.0))
             .build(),
         )
         .with(prefab_handle)
