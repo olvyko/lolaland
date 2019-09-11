@@ -33,9 +33,9 @@ const BACKGROUND_COLOR: [i32; 4] = [100, 100, 100, 255];
 pub fn run() -> Result<(), amethyst::Error> {
     let app_root = application_root_dir()?;
 
-    let display_config_path = app_root.join("assets/configs/display.ron");
-    let input_bindings_path = app_root.join("assets/configs/input.ron");
-    let assets_path = app_root.join("assets/");
+    let display_config_path = app_root.join("assets\\configs\\display.ron");
+    let input_bindings_path = app_root.join("assets\\configs\\input.ron");
+    let assets_path = app_root.join("assets\\");
 
     let game_data = GameDataBuilder::default()
         .with_bundle(

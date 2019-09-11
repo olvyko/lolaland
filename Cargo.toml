@@ -10,9 +10,9 @@ serde = "1.0"
 amethyst = "0.12.0"
 
 [dependencies.specs-physics]
-git = "https://github.com/amethyst/specs-physics.git"
-rev = "c2db9419359f58dc54415d284063138e82016c5c"
-features = ["amethyst"]
+git = "https://github.com/olvyko/specs-physics.git"
+rev = "e71dc203ada2716ac7b9b644105833a62115b0d1"
+features = ["amethyst", "physics2d"]
 
 [features]
 vulkan = ["amethyst/vulkan"]

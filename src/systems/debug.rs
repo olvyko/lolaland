@@ -1,5 +1,5 @@
 use amethyst::{
-    core::transform::Transform,
+    core::{math::Point2, transform::Transform},
     ecs::{Join, ReadStorage, Resources, System, SystemData, Write},
     renderer::{
         debug_drawing::{DebugLines, DebugLinesParams},
@@ -47,33 +47,42 @@ impl<'s> System<'s> for DebugSystem {
                 Shape::Cuboid { half_extents } => {
                     let width = half_extents.x;
                     let height = half_extents.y;
-                    // draw top line
-                    debug_lines.draw_line(
-                        [x - width / 2.0, y + height / 2.0, z].into(),
-                        [x + width / 2.0, y + height / 2.0, z].into(),
+
+                    debug_lines.draw_rotated_rectangle(
+                        Point2::new(x - width, y + height),
+                        Point2::new(x + width, y - height),
+                        0.0,
+                        transform.isometry().rotation,
                         color,
                     );
 
-                    // draw right line
-                    debug_lines.draw_line(
-                        [x + width / 2.0, y + height / 2.0, z].into(),
-                        [x + width / 2.0, y - height / 2.0, z].into(),
-                        color,
-                    );
+                    // // draw top line
+                    // debug_lines.draw_line(
+                    //     [x - width / 2.0, y + height / 2.0, z].into(),
+                    //     [x + width / 2.0, y + height / 2.0, z].into(),
+                    //     color,
+                    // );
 
-                    // draw bottom line
-                    debug_lines.draw_line(
-                        [x + width / 2.0, y - height / 2.0, z].into(),
-                        [x - width / 2.0, y - height / 2.0, z].into(),
-                        color,
-                    );
+                    // // draw right line
+                    // debug_lines.draw_line(
+                    //     [x + width / 2.0, y + height / 2.0, z].into(),
+                    //     [x + width / 2.0, y - height / 2.0, z].into(),
+                    //     color,
+                    // );
 
-                    // draw bottom line
-                    debug_lines.draw_line(
-                        [x - width / 2.0, y - height / 2.0, z].into(),
-                        [x - width / 2.0, y + height / 2.0, z].into(),
-                        color,
-                    );
+                    // // draw bottom line
+                    // debug_lines.draw_line(
+                    //     [x + width / 2.0, y - height / 2.0, z].into(),
+                    //     [x - width / 2.0, y - height / 2.0, z].into(),
+                    //     color,
+                    // );
+
+                    // // draw bottom line
+                    // debug_lines.draw_line(
+                    //     [x - width / 2.0, y - height / 2.0, z].into(),
+                    //     [x - width / 2.0, y + height / 2.0, z].into(),
+                    //     color,
+                    // );
                 }
                 _ => {}
             }
