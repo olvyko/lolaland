@@ -25,9 +25,9 @@ impl<'a, 'b> SimpleState for GameState<'a, 'b> {
     }
 
     fn fixed_update(&mut self, data: StateData<GameData>) -> SimpleTrans {
-        if let Some(dispatcher) = &mut self.fixed_dispatcher {
-            //dispatcher.dispatch(&data.world.res);
-        }
+        // if let Some(dispatcher) = &mut self.fixed_dispatcher {
+        //     dispatcher.dispatch(&data.world.res);
+        // }
         Trans::None
     }
 }

@@ -1,9 +1,5 @@
 use amethyst::{
-    assets::*,
-    core::{
-        math::{Isometry3, Vector2, Vector3},
-        Transform,
-    },
+    core::{math::Vector2, Transform},
     ecs::prelude::*,
     prelude::Builder,
 };

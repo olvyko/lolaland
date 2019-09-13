@@ -51,38 +51,10 @@ impl<'s> System<'s> for DebugSystem {
                     debug_lines.draw_rotated_rectangle(
                         Point2::new(x - width, y + height),
                         Point2::new(x + width, y - height),
-                        0.0,
+                        z,
                         transform.isometry().rotation,
                         color,
                     );
-
-                    // // draw top line
-                    // debug_lines.draw_line(
-                    //     [x - width / 2.0, y + height / 2.0, z].into(),
-                    //     [x + width / 2.0, y + height / 2.0, z].into(),
-                    //     color,
-                    // );
-
-                    // // draw right line
-                    // debug_lines.draw_line(
-                    //     [x + width / 2.0, y + height / 2.0, z].into(),
-                    //     [x + width / 2.0, y - height / 2.0, z].into(),
-                    //     color,
-                    // );
-
-                    // // draw bottom line
-                    // debug_lines.draw_line(
-                    //     [x + width / 2.0, y - height / 2.0, z].into(),
-                    //     [x - width / 2.0, y - height / 2.0, z].into(),
-                    //     color,
-                    // );
-
-                    // // draw bottom line
-                    // debug_lines.draw_line(
-                    //     [x - width / 2.0, y - height / 2.0, z].into(),
-                    //     [x - width / 2.0, y + height / 2.0, z].into(),
-                    //     color,
-                    // );
                 }
                 _ => {}
             }

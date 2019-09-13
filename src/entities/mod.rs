@@ -4,11 +4,7 @@ mod ground;
 mod player;
 
 use amethyst::{
-    assets::*,
-    core::{
-        math::{Vector2, Vector3},
-        Transform,
-    },
+    core::{math::Vector3, Transform},
     ecs::prelude::World,
 };
 
