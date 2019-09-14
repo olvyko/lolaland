@@ -9,13 +9,12 @@ mod resources;
 mod states;
 mod systems;
 
-use self::components::{AnimationId, AnimationPrefabData};
+use self::components::AnimationId;
 use self::states::LoadState;
 use self::systems::{GameBundle, PhysicsBundle};
 
 use amethyst::{
     animation::AnimationBundle,
-    assets::PrefabLoaderSystem,
     core::transform::bundle::TransformBundle,
     input::{InputBundle, StringBindings},
     prelude::*,
@@ -26,7 +25,6 @@ use amethyst::{
     },
     ui::{RenderUi, UiBundle},
     utils::application_root_dir,
-    LogLevelFilter,
 };
 
 // Dark gray
@@ -60,11 +58,6 @@ fn main() -> amethyst::Result<()> {
             "sampler_interpolation_system",
         ))?
         .with_bundle(PhysicsBundle::default().with_debug_lines())?
-        .with(
-            PrefabLoaderSystem::<AnimationPrefabData>::default(),
-            "prefab_loader_system",
-            &[],
-        )
         .with_bundle(UiBundle::<StringBindings>::new())?
         .with_bundle(GameBundle)?;
 

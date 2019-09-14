@@ -1,7 +1,11 @@
-use amethyst::core::bundle::SystemBundle;
-use amethyst::ecs::prelude::DispatcherBuilder;
+use amethyst::{
+    assets::PrefabLoaderSystem, core::bundle::SystemBundle, ecs::prelude::DispatcherBuilder,
+};
 
-use crate::systems::{AnimationSystem, CameraTransformSystem, MovementSystem};
+use crate::{
+    components::AnimationPrefabData,
+    systems::{AnimationSystem, CameraTransformSystem, MovementSystem},
+};
 
 pub struct GameBundle;
 
@@ -18,6 +22,11 @@ impl<'a, 'b> SystemBundle<'a, 'b> for GameBundle {
             ],
         );
         builder.add(CameraTransformSystem, "camera_transform_system", &[]);
+        builder.add(
+            PrefabLoaderSystem::<AnimationPrefabData>::default(),
+            "prefab_loader_system",
+            &[],
+        );
         Ok(())
     }
 }
