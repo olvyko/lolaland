@@ -6,22 +6,24 @@ Game `lolaland` - open source 2d game about little kitty named Lola.
 
 ## Development
 
-To run this project on Windows:
+**Note:** This game requires Rust nightly
 
-```
+To run this project on Windows or Linux:
+
+```bash
 cargo run --features vulkan
 ```
 
 To run this project on OSX:
 
-```
+```bash
 cargo run --features metal
 ```
 
 ## Built With
 
 - [Amethyst](https://github.com/amethyst/amethyst) - Data-oriented and data-driven game engine written in Rust
-- [Serde](https://github.com/serde-rs/serde) - Serialization framework for Rust
+- [nphysics](https://github.com/rustsim/nphysics) - a 2 and 3-dimensional physics engine for games and animations.
 
 ## Authors
 
