@@ -27,7 +27,7 @@ impl SimpleState for LoadState {
         world.register::<DynamicBox>();
 
         world.add_resource(Context::new());
-        world.add_resource(Gravity::<f32>(Vector2::<f32>::new(0.0, -9.8)));
+        world.add_resource(Gravity::<f32>(Vector2::<f32>::new(0.0, -20.0)));
 
         self.progress_counter = Some(load_assets(
             world,
@@ -68,23 +68,12 @@ impl SimpleState for LoadState {
                 };
                 load_dynamic_box(
                     data.world,
-                    redbricks_sprite,
+                    redbricks_sprite.clone(),
                     &ctx,
                     Transform::from(Vector3::new(100.0, 100.0, 0.0)),
                     32.0,
                     32.0,
                 );
-
-                let redbricks_sprite = {
-                    let sprite_sheet_list = data.world.read_resource::<SpriteSheetList>();
-                    let sprite_sheet_handle =
-                        sprite_sheet_list.get(AssetType::RedBricks).unwrap().clone();
-
-                    SpriteRender {
-                        sprite_sheet: sprite_sheet_handle.clone(),
-                        sprite_number: 0,
-                    }
-                };
                 load_dynamic_box(
                     data.world,
                     redbricks_sprite,
