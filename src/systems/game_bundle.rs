@@ -1,7 +1,7 @@
 use amethyst::core::bundle::SystemBundle;
 use amethyst::ecs::prelude::DispatcherBuilder;
 
-use crate::systems::{AnimationSystem, MovementSystem};
+use crate::systems::{AnimationSystem, CameraTransformSystem, MovementSystem};
 
 pub struct GameBundle;
 
@@ -17,6 +17,7 @@ impl<'a, 'b> SystemBundle<'a, 'b> for GameBundle {
                 "sampler_interpolation_system",
             ],
         );
+        builder.add(CameraTransformSystem, "camera_transform_system", &[]);
         Ok(())
     }
 }

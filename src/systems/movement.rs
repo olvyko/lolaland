@@ -5,24 +5,24 @@ use amethyst::{
 
 use specs_physics::PhysicsBody;
 
-use crate::components::Player;
+use crate::components::{Lola, Motion};
 
 pub struct MovementSystem;
 
 impl<'s> System<'s> for MovementSystem {
     type SystemData = (
         Read<'s, InputHandler<StringBindings>>,
-        ReadStorage<'s, Player>,
+        ReadStorage<'s, Lola>,
+        ReadStorage<'s, Motion>,
         WriteStorage<'s, PhysicsBody<f32>>,
     );
 
-    fn run(&mut self, (input, players, mut bodies): Self::SystemData) {
-        // if pos == neg { 0.0 } else if pos { 1.0 } else { -1.0 }
+    fn run(&mut self, (input, lolas, motions, mut bodies): Self::SystemData) {
         let x_move = input.axis_value("x_move").unwrap();
         //let y_move = input.axis_value("y_move").unwrap();
 
-        for (player, body) in (&players, &mut bodies).join() {
-            body.velocity.linear.x = x_move * player.velocity;
+        for (lola, motion, body) in (&lolas, &motions, &mut bodies).join() {
+            body.velocity.linear.x = x_move * motion.velocity.x;
             //body.velocity.linear.y = y_move * player.velocity;
         }
     }

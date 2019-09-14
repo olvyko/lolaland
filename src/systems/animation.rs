@@ -10,7 +10,7 @@ use amethyst::{
 
 use std::f32;
 
-use crate::resources::AnimationId;
+use crate::components::AnimationId;
 
 pub struct AnimationSystem;
 

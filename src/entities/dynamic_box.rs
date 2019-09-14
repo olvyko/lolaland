@@ -1,16 +1,30 @@
 use amethyst::{
-    core::{math::Vector2, Transform},
-    ecs::prelude::*,
+    core::{
+        math::{Vector2, Vector3},
+        Transform,
+    },
+    ecs::{prelude::World, Entity},
     prelude::Builder,
+    renderer::sprite::SpriteRender,
 };
 
 use specs_physics::{
     colliders::Shape, nphysics::object::BodyStatus, PhysicsBodyBuilder, PhysicsColliderBuilder,
 };
 
-pub fn init_dynamic_box(world: &mut World, transform: Transform, width: f32, height: f32) {
+use crate::{components::DynamicBox, resources::Context};
+
+pub fn load_dynamic_box(
+    world: &mut World,
+    sprite: SpriteRender,
+    ctx: &Context,
+    transform: Transform,
+    width: f32,
+    height: f32,
+) -> Entity {
     world
         .create_entity()
+        .with(DynamicBox::default())
         .with(transform)
         .with(
             PhysicsBodyBuilder::<f32>::from(BodyStatus::Dynamic)
@@ -24,5 +38,6 @@ pub fn init_dynamic_box(world: &mut World, transform: Transform, width: f32, hei
             })
             .build(),
         )
-        .build();
+        .with(sprite)
+        .build()
 }

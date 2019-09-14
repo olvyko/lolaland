@@ -38,7 +38,7 @@ impl<'s> System<'s> for DebugSystem {
             let color = if physics_collider.sensor {
                 Srgba::new(0.13, 0.65, 0.94, 1.0) // 1 or 1/255?!
             } else {
-                Srgba::new(0.81, 0.0, 0.5, 1.0) // 1 or 1/255?!
+                Srgba::new(0.2, 0.8, 0.4, 1.0) // 1 or 1/255?!
             };
 
             // depending on the Shape we draw the DebugLines differently; right now we only

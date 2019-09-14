@@ -1,12 +1,10 @@
-mod animation;
+mod asset;
+mod map;
+mod context;
 
-use amethyst::ecs::prelude::World;
-
-use specs_physics::{nalgebra::Vector2, parameters::Gravity};
-
-pub use self::animation::{AnimationId, AnimationPrefabData};
-
-// Add all resources needed at the start to the world
-pub fn add_resources(world: &mut World) {
-    world.add_resource(Gravity::<f32>(Vector2::<f32>::new(0.0, -9.8)));
-}
+pub use self::asset::load_assets;
+pub use self::asset::AssetType;
+pub use self::asset::PrefabList;
+pub use self::asset::SpriteSheetList;
+pub use self::context::Context;
+pub use self::map::Map;

@@ -1,5 +1,5 @@
 (
     title: "Lolaland",
-    dimensions: Some((500, 500)),
+    dimensions: Some((600, 500)),
     resizable: false,
 )

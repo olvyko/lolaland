@@ -5,9 +5,10 @@ authors = ["olvyko <olvyko@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-log = "0.4.6"
-serde = "1.0"
-amethyst = "0.12.0"
+amethyst = { version = "0.12.0", features = ["nightly"] }
+specs-derive = "0.4"
+log = { version = "0.4.6", features = ["serde"] }
+serde = { version = "1.0", features = ["derive"] }
 
 [dependencies.specs-physics]
 path = "../olvyko-specs-physics/specs-physics"
