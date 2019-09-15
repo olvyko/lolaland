@@ -9,26 +9,24 @@ mod resources;
 mod states;
 mod systems;
 
-use self::components::AnimationId;
-use self::states::LoadState;
-use self::systems::{GameBundle, PhysicsBundle};
-
 use amethyst::{
     animation::AnimationBundle,
     core::transform::bundle::TransformBundle,
     input::{InputBundle, StringBindings},
-    prelude::*,
+    prelude::{Application, GameDataBuilder},
     renderer::{
         plugins::{RenderDebugLines, RenderFlat2D, RenderToWindow},
         types::DefaultBackend,
         RenderingBundle, SpriteRender,
     },
-    ui::{RenderUi, UiBundle},
     utils::application_root_dir,
 };
 
-// Dark gray
-const BACKGROUND_COLOR: [i32; 4] = [100, 100, 100, 255];
+use crate::{
+    components::AnimationId,
+    states::LoadState,
+    systems::{GameBundle, PhysicsBundle},
+};
 
 fn main() -> amethyst::Result<()> {
     amethyst::start_logger(Default::default());
@@ -40,17 +38,16 @@ fn main() -> amethyst::Result<()> {
 
     let game_data = GameDataBuilder::default()
         .with_bundle(
-            InputBundle::<StringBindings>::new().with_bindings_from_file(&input_bindings_path)?,
-        )?
-        .with_bundle(
             RenderingBundle::<DefaultBackend>::new()
                 .with_plugin(
                     RenderToWindow::from_config_path(display_config_path)
-                        .with_clear(BACKGROUND_COLOR),
+                        .with_clear([100, 100, 100, 255]),
                 )
                 .with_plugin(RenderFlat2D::default())
-                .with_plugin(RenderUi::default())
                 .with_plugin(RenderDebugLines::default()),
+        )?
+        .with_bundle(
+            InputBundle::<StringBindings>::new().with_bindings_from_file(&input_bindings_path)?,
         )?
         .with_bundle(TransformBundle::new())?
         .with_bundle(AnimationBundle::<AnimationId, SpriteRender>::new(
@@ -58,7 +55,6 @@ fn main() -> amethyst::Result<()> {
             "sampler_interpolation_system",
         ))?
         .with_bundle(PhysicsBundle::default().with_debug_lines())?
-        .with_bundle(UiBundle::<StringBindings>::new())?
         .with_bundle(GameBundle)?;
 
     let mut game = Application::new(assets_path, LoadState::default(), game_data)?;
