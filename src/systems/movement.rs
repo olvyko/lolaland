@@ -21,7 +21,7 @@ impl<'s> System<'s> for MovementSystem {
         let x_move = input.axis_value("x_move").unwrap();
         //let y_move = input.axis_value("y_move").unwrap();
 
-        for (lola, motion, body) in (&lolas, &motions, &mut bodies).join() {
+        for (_, motion, body) in (&lolas, &motions, &mut bodies).join() {
             body.velocity.linear.x = x_move * motion.velocity.x;
             //body.velocity.linear.y = y_move * player.velocity;
         }

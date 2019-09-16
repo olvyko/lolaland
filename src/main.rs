@@ -38,6 +38,9 @@ fn main() -> amethyst::Result<()> {
 
     let game_data = GameDataBuilder::default()
         .with_bundle(
+            InputBundle::<StringBindings>::new().with_bindings_from_file(&input_bindings_path)?,
+        )?
+        .with_bundle(
             RenderingBundle::<DefaultBackend>::new()
                 .with_plugin(
                     RenderToWindow::from_config_path(display_config_path)
@@ -45,9 +48,6 @@ fn main() -> amethyst::Result<()> {
                 )
                 .with_plugin(RenderFlat2D::default())
                 .with_plugin(RenderDebugLines::default()),
-        )?
-        .with_bundle(
-            InputBundle::<StringBindings>::new().with_bindings_from_file(&input_bindings_path)?,
         )?
         .with_bundle(TransformBundle::new())?
         .with_bundle(AnimationBundle::<AnimationId, SpriteRender>::new(
