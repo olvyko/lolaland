@@ -1,4 +1,10 @@
 # Lolaland
+[![MIT][s1]][li] [![Join us on Discord][s2]][di]
+
+[s1]: https://img.shields.io/badge/license-MIT-blue.svg
+[s2]: https://img.shields.io/discord/471739116208259074.svg?logo=discord
+[li]: COPYING
+[di]: https://discord.gg/WUvJjsk
 
 Game `lolaland` - open source 2d game about little kitty named Lola.
 
