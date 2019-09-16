@@ -6,7 +6,9 @@
 [li]: COPYING
 [di]: https://discord.gg/WUvJjsk
 
-Game `lolaland` - open source 2d game about little kitty named Lola.
+Game `lolaland` - open source 2d game about little kitty named Lola.<br />
+
+**Note:** Currently, development of the game is not finished!
 
 ![Lola The Cat :D](assets/textures/lola_the_cat.png?raw=true "Lola The Cat :D")
 
@@ -41,4 +43,4 @@ See also the list of [contributors](https://github.com/olvyko/lolaland/contribut
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](docs/LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE-MIT](docs/LICENSE-MIT) file for details.
