@@ -1,33 +1,58 @@
 use amethyst::{
     assets::ProgressCounter,
-    core::{math::Vector3, Transform},
+    core::{
+        math::{Vector2, Vector3},
+        ArcThreadPool, SystemBundle, Transform,
+    },
+    ecs::{Dispatcher, DispatcherBuilder, World},
     prelude::{GameData, SimpleState, SimpleTrans, StateData, Trans},
     renderer::SpriteRender,
 };
 
 use crate::{
-    components::{Animation, DynamicBox, Subject},
+    components::{Animation, DynamicBox},
     entities::{load_camera, load_camera_subject, load_dynamic_box, load_lola},
     resources::{load_assets, AssetType, Context, Map, PrefabList, SpriteSheetList},
+    systems::PhysicsBundle,
 };
 
-use specs_physics::{nalgebra::Vector2, parameters::Gravity};
+use specs_physics::parameters::Gravity;
 
 #[derive(Default)]
-pub struct LoadState {
+pub struct LoadState<'a, 'b> {
+    fixed_dispatcher: Option<Dispatcher<'a, 'b>>,
     progress_counter: Option<ProgressCounter>,
     map: Option<Map>,
 }
 
-impl SimpleState for LoadState {
+impl<'a, 'b> LoadState<'a, 'b> {
+    fn create_dispatcher(&mut self, world: &mut World) {
+        if self.fixed_dispatcher.is_none() {
+            let mut dispatcher_builder =
+                DispatcherBuilder::new().with_pool(world.res.fetch::<ArcThreadPool>().clone());
+            PhysicsBundle::default()
+                .with_debug_lines()
+                .build(&mut dispatcher_builder)
+                .expect("Failed to register PhysicsBundle");
+
+            let mut dispatcher = dispatcher_builder.build();
+            dispatcher.setup(&mut world.res);
+            self.fixed_dispatcher = Some(dispatcher);
+        }
+    }
+}
+
+impl<'a, 'b> SimpleState for LoadState<'a, 'b> {
     fn on_start(&mut self, data: StateData<'_, GameData<'_, '_>>) {
         let world = data.world;
+
+        self.create_dispatcher(world);
 
         world.register::<Animation>();
         world.register::<DynamicBox>();
 
         world.add_resource(Context::new());
-        world.add_resource(Gravity::<f32>(Vector2::<f32>::new(0.0, -20.0)));
+        world.add_resource(Gravity::<f32>(Vector2::<f32>::new(0.0, -9.8)));
 
         self.progress_counter = Some(load_assets(
             world,
@@ -85,6 +110,13 @@ impl SimpleState for LoadState {
 
                 self.progress_counter = None;
             }
+        }
+        Trans::None
+    }
+
+    fn fixed_update(&mut self, data: StateData<GameData>) -> SimpleTrans {
+        if let Some(dispatcher) = &mut self.fixed_dispatcher {
+            dispatcher.dispatch(&data.world.res);
         }
         Trans::None
     }

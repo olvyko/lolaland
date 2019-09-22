@@ -15,9 +15,9 @@ path = "../olvyko-specs-physics/specs-physics"
 features = ["amethyst", "physics2d"]
 
 # [dependencies.specs-physics]
-# git = "https://github.com/olvyko/specs-physics.git"
-# rev = "e71dc203ada2716ac7b9b644105833a62115b0d1"
+# git = "https://github.com/jmeggitt/specs-physics.git"
 # features = ["amethyst", "physics2d"]
+# rev = "85283c57405829bd788a253bda679bde686cc060"
 
 [features]
 vulkan = ["amethyst/vulkan"]

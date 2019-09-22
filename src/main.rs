@@ -54,7 +54,6 @@ fn main() -> amethyst::Result<()> {
             "animation_control_system",
             "sampler_interpolation_system",
         ))?
-        .with_bundle(PhysicsBundle::default().with_debug_lines())?
         .with_bundle(GameBundle)?;
 
     let mut game = Application::new(assets_path, LoadState::default(), game_data)?;
