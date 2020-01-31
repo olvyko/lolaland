@@ -5,21 +5,13 @@ authors = ["olvyko <olvyko@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-amethyst = { version = "0.12.0", features = ["nightly"] }
+amethyst = { version = "0.14.0" }
 specs-derive = "0.4"
 log = { version = "0.4.6", features = ["serde"] }
 serde = { version = "1.0", features = ["derive"] }
 
-[dependencies.specs-physics]
-path = "../olvyko-specs-physics/specs-physics"
-features = ["amethyst", "physics2d"]
-
-# [dependencies.specs-physics]
-# git = "https://github.com/jmeggitt/specs-physics.git"
-# features = ["amethyst", "physics2d"]
-# rev = "85283c57405829bd788a253bda679bde686cc060"
-
 [features]
+default = ["vulkan"]
 vulkan = ["amethyst/vulkan"]
 metal = ["amethyst/metal"]
 

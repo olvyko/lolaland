@@ -1,32 +1,19 @@
 use amethyst::{
-    assets::PrefabLoaderSystem, core::bundle::SystemBundle, ecs::prelude::DispatcherBuilder,
+    core::bundle::SystemBundle,
+    ecs::prelude::{DispatcherBuilder, World},
 };
 
-use crate::{
-    components::AnimationPrefabData,
-    systems::{AnimationSystem, CameraTransformSystem, MovementSystem},
-};
+use crate::systems::CameraTransformSystem;
 
 pub struct GameBundle;
 
 impl<'a, 'b> SystemBundle<'a, 'b> for GameBundle {
-    fn build(self, builder: &mut DispatcherBuilder<'a, 'b>) -> Result<(), amethyst::Error> {
-        builder.add(MovementSystem, "movement_system", &["input_system"]);
-        builder.add(
-            AnimationSystem,
-            "animation_system",
-            &[
-                "input_system",
-                "animation_control_system",
-                "sampler_interpolation_system",
-            ],
-        );
-        builder.add(CameraTransformSystem, "camera_transform_system", &[]);
-        builder.add(
-            PrefabLoaderSystem::<AnimationPrefabData>::default(),
-            "prefab_loader_system",
-            &[],
-        );
+    fn build(
+        self,
+        world: &mut World,
+        dispatcher: &mut DispatcherBuilder<'a, 'b>,
+    ) -> Result<(), amethyst::Error> {
+        dispatcher.add(CameraTransformSystem, "camera_transform_system", &[]);
         Ok(())
     }
 }

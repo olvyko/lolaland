@@ -10,23 +10,19 @@ mod states;
 mod systems;
 
 use amethyst::{
-    animation::AnimationBundle,
     core::transform::bundle::TransformBundle,
     input::{InputBundle, StringBindings},
     prelude::{Application, GameDataBuilder},
     renderer::{
-        plugins::{RenderDebugLines, RenderFlat2D, RenderToWindow},
+        plugins::{RenderFlat2D, RenderToWindow},
         types::DefaultBackend,
-        RenderingBundle, SpriteRender,
+        RenderingBundle,
     },
     utils::application_root_dir,
 };
 
-use crate::{
-    components::AnimationId,
-    states::LoadState,
-    systems::{GameBundle, PhysicsBundle},
-};
+use states::LoadState;
+use systems::GameBundle;
 
 fn main() -> amethyst::Result<()> {
     amethyst::start_logger(Default::default());
@@ -37,23 +33,13 @@ fn main() -> amethyst::Result<()> {
     let assets_path = app_root.join("assets\\");
 
     let game_data = GameDataBuilder::default()
-        .with_bundle(
-            InputBundle::<StringBindings>::new().with_bindings_from_file(&input_bindings_path)?,
-        )?
+        .with_bundle(InputBundle::<StringBindings>::new().with_bindings_from_file(&input_bindings_path)?)?
         .with_bundle(
             RenderingBundle::<DefaultBackend>::new()
-                .with_plugin(
-                    RenderToWindow::from_config_path(display_config_path)
-                        .with_clear([100, 100, 100, 255]),
-                )
-                .with_plugin(RenderFlat2D::default())
-                .with_plugin(RenderDebugLines::default()),
+                .with_plugin(RenderToWindow::from_config_path(display_config_path)?.with_clear([100, 100, 100, 255]))
+                .with_plugin(RenderFlat2D::default()),
         )?
         .with_bundle(TransformBundle::new())?
-        .with_bundle(AnimationBundle::<AnimationId, SpriteRender>::new(
-            "animation_control_system",
-            "sampler_interpolation_system",
-        ))?
         .with_bundle(GameBundle)?;
 
     let mut game = Application::new(assets_path, LoadState::default(), game_data)?;

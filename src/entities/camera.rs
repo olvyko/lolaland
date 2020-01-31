@@ -1,7 +1,7 @@
 use amethyst::{
     core::{Parent, Transform},
     ecs::{prelude::World, Entity},
-    prelude::Builder,
+    prelude::*,
     renderer::camera::Camera,
     window::ScreenDimensions,
 };
@@ -19,9 +19,7 @@ pub fn load_camera(world: &mut World, camera_subject: Entity) -> Entity {
     world
         .create_entity()
         .with(Camera::standard_2d(200.0, 200.0))
-        .with(Parent {
-            entity: camera_subject,
-        })
+        .with(Parent { entity: camera_subject })
         .with(Subject::default())
         .with(transform)
         .build()

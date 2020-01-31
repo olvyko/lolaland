@@ -14,12 +14,10 @@ Game `lolaland` - open source 2d game about little kitty named Lola.<br />
 
 ## Development
 
-**Note:** This game requires Rust nightly
-
 To run this project on Windows or Linux:
 
 ```bash
-cargo run --features vulkan
+cargo run
 ```
 
 To run this project on OSX:

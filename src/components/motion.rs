@@ -7,14 +7,14 @@ use amethyst::{
 #[storage(DenseVecStorage)]
 pub struct Motion {
     pub velocity: Vector2<f32>,
-    pub has_jumped: bool,
+    pub max_velocity: Vector2<f32>,
 }
 
-impl Motion {
-    pub fn new() -> Self {
-        Motion {
+impl Default for Motion {
+    fn default() -> Self {
+        Self {
             velocity: Vector2::new(0.0, 0.0),
-            has_jumped: false,
+            max_velocity: Vector2::new(0.0, 0.0),
         }
     }
 }

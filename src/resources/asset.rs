@@ -1,16 +1,14 @@
+use crate::components::AnimationPrefabData;
 use amethyst::{
     assets::{AssetStorage, Handle, Loader, Prefab, PrefabLoader, ProgressCounter, RonFormat},
-    ecs::prelude::World,
+    prelude::*,
     renderer::{
         formats::texture::ImageFormat,
         sprite::{SpriteSheetFormat, SpriteSheetHandle},
-        SpriteRender, SpriteSheet, Texture,
+        SpriteSheet, Texture,
     },
 };
-
 use std::collections::HashMap;
-
-use crate::components::AnimationPrefabData;
 
 #[derive(Copy, Clone, Eq, Hash, PartialEq)]
 pub enum AssetType {
@@ -39,11 +37,7 @@ pub struct PrefabList {
 }
 
 impl PrefabList {
-    pub fn insert(
-        &mut self,
-        asset_type: AssetType,
-        prefab_handle: Handle<Prefab<AnimationPrefabData>>,
-    ) {
+    pub fn insert(&mut self, asset_type: AssetType, prefab_handle: Handle<Prefab<AnimationPrefabData>>) {
         self.prefabs.insert(asset_type, prefab_handle);
     }
 
@@ -65,19 +59,17 @@ pub fn load_assets(world: &mut World, asset_type_list: Vec<AssetType>) -> Progre
 
         match asset_type {
             AssetType::RedBricks => {
-                let sprite_sheet_handle =
-                    get_sprite_sheet_handle(world, texture_path, ron_path, &mut progress_counter);
+                let sprite_sheet_handle = get_sprite_sheet_handle(world, texture_path, ron_path, &mut progress_counter);
                 sprite_sheet_list.insert(asset_type, sprite_sheet_handle);
             }
             AssetType::Lola => {
-                let prefab_handle =
-                    get_animation_prefab_handle(world, ron_path, &mut progress_counter);
+                let prefab_handle = get_animation_prefab_handle(world, ron_path, &mut progress_counter);
                 prefab_list.insert(asset_type, prefab_handle);
             }
         };
     }
-    world.add_resource(sprite_sheet_list);
-    world.add_resource(prefab_list);
+    world.insert(sprite_sheet_list);
+    world.insert(prefab_list);
     progress_counter
 }
 
@@ -113,7 +105,5 @@ fn get_animation_prefab_handle(
     ron_path: &str,
     progress_counter: &mut ProgressCounter,
 ) -> Handle<Prefab<AnimationPrefabData>> {
-    world.exec(|loader: PrefabLoader<'_, AnimationPrefabData>| {
-        loader.load(ron_path, RonFormat, progress_counter)
-    })
+    world.exec(|loader: PrefabLoader<'_, AnimationPrefabData>| loader.load(ron_path, RonFormat, progress_counter))
 }
