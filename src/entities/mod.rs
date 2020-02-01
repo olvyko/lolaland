@@ -1,7 +1,5 @@
 mod camera;
-mod camera_subject;
-mod lola;
+mod player;
 
 pub use camera::*;
-pub use camera_subject::*;
-pub use lola::*;
+pub use player::*;

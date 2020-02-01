@@ -1,7 +1,7 @@
 use amethyst::ecs::{Component, DenseVecStorage};
 
 #[derive(Eq, Hash, PartialEq, Clone, Copy)]
-pub enum LolaState {
+pub enum PlayerState {
     Idling,
     Jumping,
     Running,
@@ -9,14 +9,14 @@ pub enum LolaState {
 
 #[derive(Component)]
 #[storage(DenseVecStorage)]
-pub struct Lola {
-    pub state: LolaState,
+pub struct Player {
+    pub state: PlayerState,
 }
 
-impl Default for Lola {
+impl Default for Player {
     fn default() -> Self {
         Self {
-            state: LolaState::Idling,
+            state: PlayerState::Idling,
         }
     }
 }

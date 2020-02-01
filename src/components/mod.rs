@@ -1,11 +1,11 @@
-mod lola;
-mod motion;
 mod animation;
+mod player;
+mod position;
+mod rect;
 mod subject;
-mod dynamic_box;
 
-pub use self::lola::Lola;
-pub use self::motion::Motion;
-pub use self::animation::{Animation, AnimationId, AnimationPrefabData};
-pub use self::dynamic_box::DynamicBox;
-pub use self::subject::Subject;
+pub use animation::*;
+pub use player::*;
+pub use position::*;
+pub use rect::*;
+pub use subject::*;

@@ -1,31 +1,25 @@
-use amethyst::{
-    core::Transform,
-    ecs::{Join, ReadStorage, System, WriteStorage},
-};
-
-use crate::components::{Lola, Subject};
+use crate::components::{Player, Position, Subject};
+use amethyst::ecs::{Join, ReadStorage, System, WriteStorage};
 
 pub struct CameraTransformSystem;
 
 impl<'s> System<'s> for CameraTransformSystem {
     type SystemData = (
-        ReadStorage<'s, Lola>,
+        ReadStorage<'s, Player>,
         ReadStorage<'s, Subject>,
-        WriteStorage<'s, Transform>,
+        WriteStorage<'s, Position>,
     );
 
-    fn run(&mut self, (lolas, subject_tags, mut transforms): Self::SystemData) {
-        let mut lola_x = 0.0;
-        let mut lola_y = 0.0;
-
-        for (_, transform) in (&lolas, &transforms).join() {
-            lola_x = transform.translation().x;
-            lola_y = transform.translation().y;
+    fn run(&mut self, (players, subject_tags, mut positions): Self::SystemData) {
+        let mut player_x = 0.0;
+        let mut player_y = 0.0;
+        for (_, position) in (&players, &positions).join() {
+            player_x = position.x;
+            player_y = position.y;
         }
-
-        for (_, transform) in (&subject_tags, &mut transforms).join() {
-            transform.set_translation_x(lola_x / 2.0);
-            transform.set_translation_y(lola_y / 2.0);
+        for (_, position) in (&subject_tags, &mut positions).join() {
+            position.x = player_x / 2.0;
+            position.y = player_y / 2.0;
         }
     }
 }
